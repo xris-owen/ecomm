@@ -20,22 +20,47 @@ class Homescreen extends StatelessWidget {
       appBar: const CustomAppBar(
         title: 'Zero2Unicorn',
       ),
-      body: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-          child: CarouselSlider(
-            options: CarouselOptions(
-              aspectRatio: 1.8,
-              viewportFraction: 0.9,
-              enlargeCenterPage: true,
-              enlargeStrategy: CenterPageEnlargeStrategy.height,
-              enableInfiniteScroll: false,
-              initialPage: 2,
-              autoPlay: false,
-            ),
-            items: Category.categories
-                .map((category) => CarouselCard(category: category))
-                .toList(),
-          )),
+      body: ListView(
+        children: [
+          Column(
+            children: [
+              // Category Carousel
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    aspectRatio: 1.8,
+                    viewportFraction: 0.9,
+                    enlargeCenterPage: true,
+                    enlargeStrategy: CenterPageEnlargeStrategy.height,
+                    enableInfiniteScroll: false,
+                    initialPage: 2,
+                    autoPlay: false,
+                  ),
+                  items: Category.categories
+                      .map((category) => CarouselCard(category: category))
+                      .toList(),
+                ),
+              ),
+              //Recommended products
+              const SectionTitle(title: "RECOMMENDED"),
+              ProductCarousel(
+                products: Product.products
+                    .where((product) => product.isRecommended)
+                    .toList(),
+              ),
+              // Popular products
+              const SectionTitle(title: "MOST POPULAR"),
+              ProductCarousel(
+                products: Product.products
+                    .where((product) => product.isPopular)
+                    .toList(),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        ],
+      ),
       bottomNavigationBar: const CustomBottomBar(),
     );
   }
