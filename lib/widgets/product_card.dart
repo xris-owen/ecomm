@@ -5,8 +5,10 @@ class ProductCard extends StatelessWidget {
   const ProductCard({
     Key? key,
     required this.product,
+    this.widthFactor = 2.5,
   }) : super(key: key);
   final Product product;
+  final double widthFactor;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class ProductCard extends StatelessWidget {
         ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
           child: SizedBox(
-            width: MediaQuery.of(context).size.width / 2.5,
+            width: MediaQuery.of(context).size.width / widthFactor,
             height: 150,
             child: Image.network(
               product.imageUrl,
@@ -26,7 +28,7 @@ class ProductCard extends StatelessWidget {
         Positioned(
           top: 70,
           child: Container(
-            width: MediaQuery.of(context).size.width / 2.5,
+            width: MediaQuery.of(context).size.width / widthFactor,
             height: 70,
             decoration: BoxDecoration(
               color: Colors.black.withAlpha(50),
@@ -38,7 +40,7 @@ class ProductCard extends StatelessWidget {
           left: 5,
           child: Container(
             padding: const EdgeInsets.all(4),
-            width: MediaQuery.of(context).size.width / 2.5 - 10,
+            width: MediaQuery.of(context).size.width / widthFactor - 10,
             height: 60,
             decoration: const BoxDecoration(
               color: Colors.black,
